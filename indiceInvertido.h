@@ -1,5 +1,7 @@
 #ifndef HASH_ABERTO
 #define HASH_ABERTO
+#include "hash.h"
+#include <stdbool.h>
 
 /* Os cabeçalhos de todas as funções e os TADs podem ser alterados */
 
