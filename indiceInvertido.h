@@ -9,15 +9,15 @@
 
 typedef struct {
     int n; // numero de documentos
-    Chave chave;
-    NomeDocumento documentos[ND];
+    Chave chave; //Palavras chave
+    NomeDocumento documentos[ND]; //Documentos associados a palavra chave
 } Item;
 
 typedef Item IndiceInvertido[M];
 
 /* Funções */
 
-void inicia(IndiceInvertido);
+void inicia(IndiceInvertido dic);
 bool insereDocumento(IndiceInvertido, Chave, NomeDocumento);
 int busca(IndiceInvertido, Chave);
 int consulta(IndiceInvertido, Chave*, int, NomeDocumento*);
