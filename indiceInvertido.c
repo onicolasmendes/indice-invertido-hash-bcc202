@@ -13,6 +13,17 @@ void inicia(IndiceInvertido dic)
     }
 }
 
+void leDocumento(IndiceInvertido dic, int n){
+    for (int i = 0; i < n; i++)
+    {
+        char str[MAX_STR];
+        fgets(str, MAX_STR, stdin);
+        int tam = strlen(str);
+        
+    }
+       
+}
+
 int busca(IndiceInvertido dic, Chave chave)
 {
     int j = 0;
