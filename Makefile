@@ -1,11 +1,11 @@
 all: tp.o hash.o indiceInvertido.o
-	@gcc tp.o hash.o indiceInvertido.o -o exe
+	@gcc tp.o hash.o indiceInvertido.o -o exe -Wall
 	@rm -r *.o
 tp.o: tp.c
-	@gcc tp.c -c
+	@gcc tp.c -c -Wall
 indiceInvertido.o: indiceInvertido.c
-	@gcc indiceInvertido.c -c
+	@gcc indiceInvertido.c -c -Wall
 hash.o: hash.c
-	@gcc hash.c -c
+	@gcc hash.c -c -Wall
 run:
 	@./exe
