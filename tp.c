@@ -1,4 +1,5 @@
 #include "indiceInvertido.h"
+#include <stdio.h>
 
 int main() {
     int n;
@@ -6,6 +7,8 @@ int main() {
 
     IndiceInvertido dic;
     inicia(dic);
+
+    leDocumento(dic, n);
     
     
 
