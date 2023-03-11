@@ -9,6 +9,8 @@ int main() {
     inicia(dic);
 
     leDocumento(dic, n);
+
+    imprime(dic);
     
     
 

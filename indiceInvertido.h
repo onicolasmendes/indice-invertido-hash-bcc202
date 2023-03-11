@@ -22,6 +22,7 @@ void leDocumento(IndiceInvertido dic, int n);
 bool insereDocumento(IndiceInvertido, Chave, NomeDocumento);
 bool inserePalavraChave(IndiceInvertido, Chave);
 int busca(IndiceInvertido, Chave);
+
 int consulta(IndiceInvertido, Chave*, int, NomeDocumento*);
 void imprime(IndiceInvertido);
 

@@ -37,27 +37,26 @@ void leDocumento(IndiceInvertido dic, int n)
             {
                 strcpy(nomeDocumento, aux);
                 qtdPalavras++;
-                printf("%s\n", nomeDocumento);
             }
             else //Palavras chaves associadas ao documento
             {
                 // Insere as palavras chaves e o nome do documento associado
                 inserePalavraChave(dic, aux);
                 insereDocumento(dic, aux, nomeDocumento);
-
-                printf("%s\n", aux);
+                qtdPalavras++;
             }
-            
+
             aux = strtok(NULL, " ");
         }
     }
-    return;
+
 }
 
 bool inserePalavraChave(IndiceInvertido dic, Chave chave)
 {
     // Caso em que a chave já está no TAD
-    if (busca(dic, chave) != -1)
+    int pos = busca(dic, chave);
+    if ((pos != -1) || (strcmp(dic[pos].chave, chave) == 0))
     {
         return false;
     }
@@ -110,7 +109,26 @@ bool insereDocumento(IndiceInvertido dic, Chave chave, NomeDocumento doc)
         {
             return false;
         }
-        strcpy(dic[pos].documentos[dic->n++], doc);
+        strcpy(dic[pos].documentos[dic[pos].n++], doc);
         return true;
+    }
+}
+
+void imprime(IndiceInvertido dic)
+{
+    for(int i = 0; i < M; i++)
+    {
+        if(strcmp(dic[i].chave, VAZIO) != 0)
+        {
+            printf("%s", dic[i].chave);
+            //printf("entrei\n");
+            /*printf("%s -", dic[i].chave); 
+            for (int j = 0; j < dic[i].n; j++)
+            {
+                printf(" %s", dic[i].documentos[j]);
+            }*/
+        printf("\n");    
+        }
+        
     }
 }
