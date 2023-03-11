@@ -16,9 +16,19 @@ void inicia(IndiceInvertido dic)
 void leDocumento(IndiceInvertido dic, int n){
     for (int i = 0; i < n; i++)
     {
-        char str[MAX_STR];
+        char *str;
         fgets(str, MAX_STR, stdin);
         int tam = strlen(str);
+        str[tam-1] = '\0';
+        
+        char *aux;
+        aux = strtok(str, NULL);
+        while(aux != NULL)
+        {
+            strcpy()
+        }
+        
+
         
     }
        
