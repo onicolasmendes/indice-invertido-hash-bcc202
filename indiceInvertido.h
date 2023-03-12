@@ -18,9 +18,15 @@ typedef Item IndiceInvertido[M];
 /* Funções */
 
 void inicia(IndiceInvertido dic);
+
 void leDocumento(IndiceInvertido dic, int n);
+
 bool insereDocumento(IndiceInvertido, Chave, NomeDocumento);
+
 bool inserePalavraChave(IndiceInvertido, Chave);
+
+void vazioTodosDocumentos(NomeDocumento *documentos);
+
 int busca(IndiceInvertido, Chave);
 
 void leOpcao(char *c, Chave *chaves, int *qtdChaves);
@@ -29,9 +35,10 @@ void selecionaNaoVazio(NomeDocumento *origem, NomeDocumento *destino, int *qtd);
 
 void ordena(NomeDocumento *documentos, int inicio, int fim);
 
-void imprimeResultadoBusca(NomeDocumento *documentos);
+void imprimeResultadoBusca(NomeDocumento *documentos, int tamNaoVazio);
 
 void consulta(IndiceInvertido, Chave*, int, NomeDocumento*);
+
 void imprime(IndiceInvertido);
 
 void sort(NomeDocumento*, int);

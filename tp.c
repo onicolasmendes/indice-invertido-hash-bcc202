@@ -2,42 +2,63 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int main()
+{
+
     int n;
     scanf("%d\n", &n);
 
+    // Criação do Indice Invertido
     IndiceInvertido dic;
     inicia(dic);
 
+    // Função que le os documentos e palavras chaves associadas, adicionando-os ao Indice Invertido, por meio de outras funções criadas no TAD IndiceInvertido
     leDocumento(dic, n);
 
+    // Vetor de chaves que será usado para receber as palavras chaves passadas pelo usuário para busca
     Chave chaves[M];
-    char op;
     int qtdChavesBusca;
-    NomeDocumento resultados[ND];
-    //Coloca vazio em todas as posições em Documentos
-    for(int i = 0; i < ND; i++)
-    {
-        strcpy(resultados[i], VAZIO);
-    }
 
+    char op;
+
+    // Vetor de documentos que será utilizado para receber os documentos que atendem as pesquisas + strings VAZIO
+    NomeDocumento resultados[ND];
+
+    // Coloca vazio em todas as posições em Documentos
+    vazioTodosDocumentos(resultados);
+
+    // Le opção do usuário e pega as palavras chaves da busca e a quantidade das mesmas, em caso de uma busca
     leOpcao(&op, chaves, &qtdChavesBusca);
 
     switch (op)
     {
     case 'B':
-        consulta(dic, chaves,qtdChavesBusca, resultados);
+        // Realiza a busca dos documentos que possuem as palavras chaves informadas pelo usu[ario]
+        consulta(dic, chaves, qtdChavesBusca, resultados);
+
+        // Vetor auxiliar para receber documentos válidos (não vazios)
         int tamNaoVazios;
         NomeDocumento naoVazios[ND];
-        selecionaNaoVazio(resultados, naoVazios, &tamNaoVazios);       
-        ordena(resultados, 0 , tamNaoVazios - 1);
-        imprimeResultadoBusca(resultados);
+
+        // Função varre todo o vetor resultados e passa somente os documentos válidos (não vazios) para o vetor auxiliar
+        selecionaNaoVazio(resultados, naoVazios, &tamNaoVazios);
+
+        // Caso não haja nenhum  documento válido ou apenas um documento válido, não se faz necessário chamar a função de ordenação
+        if (tamNaoVazios != 0 && tamNaoVazios != 1)
+        {
+            // Ordena o vetor de documentos válidos que atendem as demandas da pesquisa (QuickSort)
+            ordena(naoVazios, 0, tamNaoVazios - 1);
+        }
+
+        // Imprime os documentos válidos que atendem as demandas da pesquisa
+        imprimeResultadoBusca(naoVazios, tamNaoVazios);
         break;
     case 'I':
+        // Função que imprime o Indice Invertido
         imprime(dic);
         break;
     default:
         break;
-    }    
+    }
     return 0;
 }
