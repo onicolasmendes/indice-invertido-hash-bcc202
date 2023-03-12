@@ -21,7 +21,8 @@ void leDocumento(IndiceInvertido dic, int n)
         // Leitura da linha
         char str[MAX_STR];
         fgets(str, MAX_STR, stdin);
-        // int tam = strlen(str);
+
+        // Remove o \n
         str[strcspn(str, "\n")] = 0;
 
         // Tokenização da string
@@ -59,7 +60,7 @@ bool inserePalavraChave(IndiceInvertido dic, Chave chave)
     int pos = busca(dic, chave);
     if (pos != -1)
     {
-        if ((strcmp(dic[pos].chave, chave) == 0))
+        if ((strcmp(dic[pos].chave, chave) == 0)) // Caso em que a posição possui a chave identica passada pelo parâmetro
         {
             return false;
         }
@@ -102,21 +103,15 @@ int busca(IndiceInvertido dic, Chave chave)
 
 bool insereDocumento(IndiceInvertido dic, Chave chave, NomeDocumento doc)
 {
-    if (busca(dic, chave) == -1) // Caso em que a chave não está no índice invertido
+
+    int pos = busca(dic, chave);
+    if (dic[pos].n == ND) // Caso em que o numero máximo de documentos foi atingido
     {
         return false;
     }
-    else
-    {
-        int pos = busca(dic, chave);
-        if (dic[pos].n == ND) // Caso em que o numero máximo de documentos foi atingido
-        {
-            return false;
-        }
-        strcpy(dic[pos].documentos[dic[pos].n], doc);
-        dic[pos].n++;
-        return true;
-    }
+    strcpy(dic[pos].documentos[dic[pos].n], doc);
+    dic[pos].n++;
+    return true;
 }
 
 void imprime(IndiceInvertido dic)
@@ -131,6 +126,50 @@ void imprime(IndiceInvertido dic)
                 printf(" %s", dic[i].documentos[j]);
             }
             printf("\n");
+        }
+    }
+}
+
+void consulta(IndiceInvertido dic, Chave *chaves, int n, NomeDocumento *resultados)
+{
+
+    for (int i = 0; i < n; i++)
+    {
+        int pos = 0;
+        for (int j = 0; j < M; j++)
+        {
+            if (i == 0) // Caso da primeira palavra-chave pesquisada
+            {
+                if (strcmp(dic[j].chave, chaves[i]) == 0) // Insere os documentos que possuem a palavra chave associadas
+                {
+                    for (int k = 0; k < dic[j].n; k++) // Passa todos os documentos pro vetor
+                    {
+                        strcpy(resultados[pos], dic[j].documentos[k]);
+                        pos++;
+                    }
+                }
+            }
+            else // Caso em que há mais de uma palavra chave na busca
+            {
+                if (strcmp(dic[j].chave, chaves[i]) == 0)
+                {
+                    for (int l = 0; l < ND; l++) //Percorre o vetor de documentos da chave (s) anterior
+                    {
+                        int docExistente = 0;
+                        for (int k = 0; k < dic[j].n; k++) //Compara cada documento da chave (s) anterior com os documentos da chave que
+                        {
+                            if (strcmp(resultados[l], dic[j].documentos[k]) == 0)
+                            {
+                                docExistente = 1;
+                            }
+                        }
+                        if (!docExistente) //Caso em que o documento não atende aos multiplos critérios da pesquisa
+                        {
+                            strcpy(resultados[l], VAZIO); //Recebe vazio
+                        }
+                    }
+                }
+            }
         }
     }
 }

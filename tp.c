@@ -4,14 +4,14 @@
 int main() {
     int n;
     scanf("%d\n", &n);
-    //getchar();
 
     IndiceInvertido dic;
     inicia(dic);
 
     leDocumento(dic, n);
 
-    imprime(dic);
+    
+    //imprime(dic);
     
     
 
