@@ -27,7 +27,10 @@ int main() {
     {
     case 'B':
         consulta(dic, chaves,qtdChavesBusca, resultados);
-        ordena(resultados, 0 , 99 );
+        int tamNaoVazios;
+        NomeDocumento naoVazios[ND];
+        selecionaNaoVazio(resultados, naoVazios, &tamNaoVazios);       
+        ordena(resultados, 0 , tamNaoVazios - 1);
         imprimeResultadoBusca(resultados);
         break;
     case 'I':

@@ -25,6 +25,8 @@ int busca(IndiceInvertido, Chave);
 
 void leOpcao(char *c, Chave *chaves, int *qtdChaves);
 
+void selecionaNaoVazio(NomeDocumento *origem, NomeDocumento *destino, int *qtd);
+
 void ordena(NomeDocumento *documentos, int inicio, int fim);
 
 void imprimeResultadoBusca(NomeDocumento *documentos);

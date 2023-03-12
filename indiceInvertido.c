@@ -213,7 +213,7 @@ void ordena(NomeDocumento *documentos, int inicio, int final)
 
     while(esquerda <= direita)
     {
-        while((esquerda < final) && (strcmp(documentos[esquerda], documentos[pivo]) <= 0))
+        while((esquerda < final) && (strcmp(documentos[esquerda], documentos[pivo]) < 0))
         {
             esquerda++;
         }
@@ -256,4 +256,17 @@ void imprimeResultadoBusca(NomeDocumento *documentos)
         printf("none\n");
     }
     
+}
+
+void selecionaNaoVazio(NomeDocumento *origem, NomeDocumento *destino, int *qtd){
+    int pos = 0;
+    for(int i = 0; i < ND; i++)
+    {
+        if(strcmp(origem[i], VAZIO) != 0)
+        {
+            strcpy(destino[pos], origem[i]);
+            pos++;
+        }
+    }
+    *qtd = pos;
 }
