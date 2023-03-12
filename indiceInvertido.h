@@ -23,7 +23,11 @@ bool insereDocumento(IndiceInvertido, Chave, NomeDocumento);
 bool inserePalavraChave(IndiceInvertido, Chave);
 int busca(IndiceInvertido, Chave);
 
+void leOpcao(char *c, Chave *chaves, int *qtdChaves);
 
+void ordena(NomeDocumento *documentos, int inicio, int fim);
+
+void imprimeResultadoBusca(NomeDocumento *documentos);
 
 void consulta(IndiceInvertido, Chave*, int, NomeDocumento*);
 void imprime(IndiceInvertido);

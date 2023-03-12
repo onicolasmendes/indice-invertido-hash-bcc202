@@ -173,3 +173,87 @@ void consulta(IndiceInvertido dic, Chave *chaves, int n, NomeDocumento *resultad
         }
     }
 }
+
+void leOpcao(char *c, Chave *chaves, int *quantChaves){
+    //Le string
+    char str[MAX_STR];
+    fgets(str, MAX_STR, stdin);
+    
+    //Remove \n
+    str[strcspn(str, "\n")] = 0;
+
+    //Tokenização da string
+    char *aux = strtok(str, " ");
+
+    //Opção do user: B ou I
+    *c = aux[0];
+
+    aux = strtok(NULL, " ");
+
+    int posChaves = 0;
+
+    while (aux != NULL)
+    {
+        strcpy(chaves[posChaves], aux);
+        aux = strtok(NULL, " ");
+        posChaves++;
+    }
+
+    *quantChaves = posChaves;
+}
+
+
+void ordena(NomeDocumento *documentos, int inicio, int final)
+{
+    int pivo, esquerda, direita;
+    NomeDocumento aux;
+    pivo = inicio;
+    esquerda = inicio;
+    direita = final;
+
+    while(esquerda <= direita)
+    {
+        while((esquerda < final) && (strcmp(documentos[esquerda], documentos[pivo]) <= 0))
+        {
+            esquerda++;
+        }
+        while((direita > inicio) && (strcmp(documentos[direita], documentos[pivo])> 0))
+        {
+            direita--;
+        }
+        if(esquerda <= direita)
+        {
+            strcpy(aux, documentos[esquerda]);
+            strcpy(documentos[esquerda],documentos[direita]);
+            strcpy(documentos[direita], aux);
+            esquerda++;
+            direita--;
+        }
+    }
+    if(direita > inicio)
+    {
+        ordena(documentos, inicio, direita);
+    }
+    if(esquerda < final)
+    {
+        ordena(documentos, esquerda, final);
+    }
+}
+
+void imprimeResultadoBusca(NomeDocumento *documentos)
+{
+    int control = 0;
+    for (int i = 0; i < ND; i++)
+    {
+        if(strcmp(documentos[i], VAZIO) != 0)
+        {
+            printf("%s\n", documentos[i]);
+            control++;
+        }
+    }
+    if(!control)
+    {
+        printf("none\n");
+    }
+    
+}
