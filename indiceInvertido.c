@@ -21,9 +21,9 @@ void leDocumento(IndiceInvertido dic, int n)
         // Leitura da linha
         char str[MAX_STR];
         fgets(str, MAX_STR, stdin);
-       // int tam = strlen(str);
+        // int tam = strlen(str);
         str[strcspn(str, "\n")] = 0;
-        
+
         // Tokenização da string
         char *aux = strtok(str, " ");
 
@@ -34,34 +34,35 @@ void leDocumento(IndiceInvertido dic, int n)
         // Inserções
         while (aux != NULL)
         {
-            if (qtdPalavras == 0) //Nome do documentos
+            if (qtdPalavras == 0) // Nome do documentos
             {
                 strcpy(nomeDocumento, aux);
                 qtdPalavras++;
             }
-            else //Palavras chaves associadas ao documento
+            else // Palavras chaves associadas ao documento
             {
                 // Insere as palavras chaves e o nome do documento associado
                 inserePalavraChave(dic, aux);
                 insereDocumento(dic, aux, nomeDocumento);
-                //printf("%s\n", aux);
+                // printf("%s\n", aux);
                 qtdPalavras++;
             }
 
             aux = strtok(NULL, " ");
         }
-    
     }
-
 }
 
 bool inserePalavraChave(IndiceInvertido dic, Chave chave)
 {
     // Caso em que a chave já está no TAD
     int pos = busca(dic, chave);
-    if ((pos != -1) || (strcmp(dic[pos].chave, chave) == 0))
+    if (pos != -1)
     {
-        return false;
+        if ((strcmp(dic[pos].chave, chave) == 0))
+        {
+            return false;
+        }
     }
     // Caso em que a chave não está no TAD
     int j = 0;
@@ -120,13 +121,12 @@ bool insereDocumento(IndiceInvertido dic, Chave chave, NomeDocumento doc)
 
 void imprime(IndiceInvertido dic)
 {
-    for(int i = 0; i < M; i++)
+    for (int i = 0; i < M; i++)
     {
-        if(strcmp(dic[i].chave, VAZIO) != 0)
+        if (strcmp(dic[i].chave, VAZIO) != 0)
         {
-           printf("%s - ", dic[i].chave);     
+            printf("%s - ", dic[i].chave);
+            printf("\n");
         }
-
- 
     }
 }
