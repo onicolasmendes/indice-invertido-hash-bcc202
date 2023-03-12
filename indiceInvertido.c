@@ -21,8 +21,9 @@ void leDocumento(IndiceInvertido dic, int n)
         // Leitura da linha
         char str[MAX_STR];
         fgets(str, MAX_STR, stdin);
-        int tam = strlen(str);
-        str[tam - 1] = '\0';
+       // int tam = strlen(str);
+        str[strcspn(str, "\n")] = 0;
+        
         // Tokenização da string
         char *aux = strtok(str, " ");
 
@@ -43,11 +44,13 @@ void leDocumento(IndiceInvertido dic, int n)
                 // Insere as palavras chaves e o nome do documento associado
                 inserePalavraChave(dic, aux);
                 insereDocumento(dic, aux, nomeDocumento);
+                //printf("%s\n", aux);
                 qtdPalavras++;
             }
 
             aux = strtok(NULL, " ");
         }
+    
     }
 
 }
@@ -109,7 +112,8 @@ bool insereDocumento(IndiceInvertido dic, Chave chave, NomeDocumento doc)
         {
             return false;
         }
-        strcpy(dic[pos].documentos[dic[pos].n++], doc);
+        strcpy(dic[pos].documentos[dic[pos].n], doc);
+        dic[pos].n++;
         return true;
     }
 }
@@ -120,15 +124,9 @@ void imprime(IndiceInvertido dic)
     {
         if(strcmp(dic[i].chave, VAZIO) != 0)
         {
-            printf("%s", dic[i].chave);
-            //printf("entrei\n");
-            /*printf("%s -", dic[i].chave); 
-            for (int j = 0; j < dic[i].n; j++)
-            {
-                printf(" %s", dic[i].documentos[j]);
-            }*/
-        printf("\n");    
+           printf("%s - ", dic[i].chave);     
         }
-        
+
+ 
     }
 }
