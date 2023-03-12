@@ -125,7 +125,11 @@ void imprime(IndiceInvertido dic)
     {
         if (strcmp(dic[i].chave, VAZIO) != 0)
         {
-            printf("%s - ", dic[i].chave);
+            printf("%s -", dic[i].chave);
+            for (int j = 0; j < dic[i].n; j++)
+            {
+                printf(" %s", dic[i].documentos[j]);
+            }
             printf("\n");
         }
     }
