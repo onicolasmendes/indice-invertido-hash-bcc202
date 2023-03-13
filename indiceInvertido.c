@@ -234,9 +234,18 @@ void ordena(NomeDocumento *documentos, int inicio, int final) // QuickSort para 
         }
         if (esquerda <= direita)
         {
-            strcpy(aux, documentos[esquerda]);
-            strcpy(documentos[esquerda], documentos[direita]);
-            strcpy(documentos[direita], aux);
+            if (&aux != &documentos[esquerda]) //IF para evitar o overlap de strings - copiar um endereço para ele mesmo
+            {
+                strcpy(aux, documentos[esquerda]);
+            }
+            if (&documentos[esquerda] != &documentos[direita])
+            {
+                strcpy(documentos[esquerda], documentos[direita]);
+            }
+            if (&documentos[direita] != &aux)
+            {
+                strcpy(documentos[direita], aux);
+            }
             esquerda++;
             direita--;
         }
