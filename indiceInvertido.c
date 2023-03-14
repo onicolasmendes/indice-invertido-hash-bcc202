@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-//Colisoes
+//Colisoes - Variável para contar a quantidade de colisões
 int colisoes = 0;
 
 // Inicialização do indice invertido - Copia vazio para todas posições
@@ -80,6 +80,7 @@ bool inserePalavraChave(IndiceInvertido dic, Chave chave)
     while ((strcmp(dic[(ini + j) % M].chave, VAZIO) != 0) && (j < M)) // Busca a posição disponível
     {
         j++;
+        colisoes++; //Incrementa o contador de colisões
     }
 
     if (j < M) // Verifica se a posição é válida - Se não estoura o tamanho máximo de Palavras Chaves
