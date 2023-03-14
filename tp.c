@@ -1,6 +1,7 @@
 #include "indiceInvertido.h"
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
 
 int main()
 {
@@ -11,6 +12,11 @@ int main()
     // Criação do Indice Invertido
     IndiceInvertido dic;
     inicia(dic);
+
+     //Cálculo do tempo de execução do código
+    double tempo_gasto = 0.0;
+    clock_t begin = clock();  
+  
 
     // Função que le os documentos e palavras chaves associadas, adicionando-os ao Indice Invertido, por meio de outras funções criadas no TAD IndiceInvertido
     leDocumento(dic, n);
@@ -60,5 +66,10 @@ int main()
     default:
         break;
     }
+
+    //Término do cálculo da execução
+    clock_t end = clock();
+    tempo_gasto += (double) (end - begin) / CLOCKS_PER_SEC;
+    //printf("Tempo gasto %f s\n", tempo_gasto);
     return 0;
 }
