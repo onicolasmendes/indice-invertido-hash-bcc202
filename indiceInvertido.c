@@ -3,13 +3,6 @@
 #include <string.h>
 #include <stdio.h>
 
-
-//Colisoes - Variável para contar a quantidade de colisões
-int colisoes = 0;
-
-//Memoria - Variável para contar a memória consumida 
-int memoria = 0;
-
 // Inicialização do indice invertido - Copia vazio para todas posições
 void inicia(IndiceInvertido dic)
 {
@@ -22,7 +15,7 @@ void inicia(IndiceInvertido dic)
 }
 
 // Função que le os documentos e palavras chaves associadas, adicionando-os ao Indice Invertido, por meio de outras funções criadas no TAD IndiceInvertido
-void leDocumento(IndiceInvertido dic, int n)
+void leDocumento(IndiceInvertido dic, int n, int *colisoes)
 {
     for (int i = 0; i < n; i++)
     {
@@ -51,7 +44,7 @@ void leDocumento(IndiceInvertido dic, int n)
             else // Palavras chaves associadas ao documento
             {
                 // Insere as palavras chaves e o nome do documento associado
-                inserePalavraChave(dic, aux);
+                inserePalavraChave(dic, aux, colisoes);
                 insereDocumento(dic, aux, nomeDocumento);
                 qtdPalavras++;
             }
@@ -69,7 +62,7 @@ void vazioTodosDocumentos(NomeDocumento *documentos)
     }
 }
 
-bool inserePalavraChave(IndiceInvertido dic, Chave chave)
+bool inserePalavraChave(IndiceInvertido dic, Chave chave, int *colisoes)
 {
     // Caso em que a chave já está no Indice Invertido
     int pos = busca(dic, chave);
@@ -83,14 +76,13 @@ bool inserePalavraChave(IndiceInvertido dic, Chave chave)
     while ((strcmp(dic[(ini + j) % M].chave, VAZIO) != 0) && (j < M)) // Busca a posição disponível
     {
         j++;
-        colisoes++; //Incrementa o contador de colisões
+        *colisoes = *colisoes + 1; // Incrementa o contador de colisões
     }
 
     if (j < M) // Verifica se a posição é válida - Se não estoura o tamanho máximo de Palavras Chaves
     {
         // Inserção da chave
         strcpy(dic[(ini + j) % M].chave, chave);
-        memoria++; // Incrementa a variável de memória
         return true;
     }
 
@@ -130,7 +122,6 @@ bool insereDocumento(IndiceInvertido dic, Chave chave, NomeDocumento doc)
     // Insere o documento e incrementa o n
     strcpy(dic[pos].documentos[dic[pos].n], doc);
     dic[pos].n++;
-    memoria++; //Incrementa a variável de memória 
     return true;
 }
 
@@ -244,7 +235,7 @@ void ordena(NomeDocumento *documentos, int inicio, int final) // QuickSort para 
         }
         if (esquerda <= direita)
         {
-            if (&aux != &documentos[esquerda]) //IF para evitar o overlap de strings - copiar um endereço para ele mesmo
+            if (&aux != &documentos[esquerda]) // IF para evitar o overlap de strings - copiar um endereço para ele mesmo
             {
                 strcpy(aux, documentos[esquerda]);
             }
@@ -304,10 +295,13 @@ void selecionaNaoVazio(NomeDocumento *origem, NomeDocumento *destino, int *qtd)
     *qtd = pos;
 }
 
-void imprimeColisoes(){
+void imprimeColisoes(int colisoes)
+{
     printf("Quantidade de colisões: %d\n", colisoes);
 }
 
-void imprimeMemoria(){
-    printf("Memória gastas: %d unidades de memória\n", memoria);
+void imprimeMemoria()
+{
+    int memoria = M * sizeof(Item); // Tamanho do vetor IndiceInvertido alocado estaticamente
+    printf("Memória gasta: %d bytes\n", memoria);
 }

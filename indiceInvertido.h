@@ -19,11 +19,11 @@ typedef Item IndiceInvertido[M];
 
 void inicia(IndiceInvertido dic);
 
-void leDocumento(IndiceInvertido dic, int n);
+void leDocumento(IndiceInvertido dic, int n, int *);
 
 bool insereDocumento(IndiceInvertido, Chave, NomeDocumento);
 
-bool inserePalavraChave(IndiceInvertido, Chave);
+bool inserePalavraChave(IndiceInvertido, Chave, int *);
 
 void vazioTodosDocumentos(NomeDocumento *documentos);
 
@@ -41,9 +41,9 @@ void consulta(IndiceInvertido, Chave*, int, NomeDocumento*);
 
 void imprime(IndiceInvertido);
 
-void sort(NomeDocumento*, int);
+//void sort(NomeDocumento*, int);
 
-void imprimeColisoes();
+void imprimeColisoes(int);
 
 void imprimeMemoria();
 
