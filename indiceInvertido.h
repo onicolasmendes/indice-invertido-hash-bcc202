@@ -45,4 +45,6 @@ void sort(NomeDocumento*, int);
 
 void imprimeColisoes();
 
+void imprimeMemoria();
+
 #endif // !HASH_ABERTO

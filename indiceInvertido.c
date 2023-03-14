@@ -7,6 +7,9 @@
 //Colisoes - Variável para contar a quantidade de colisões
 int colisoes = 0;
 
+//Memoria - Variável para contar a memória consumida 
+int memoria = 0;
+
 // Inicialização do indice invertido - Copia vazio para todas posições
 void inicia(IndiceInvertido dic)
 {
@@ -87,6 +90,7 @@ bool inserePalavraChave(IndiceInvertido dic, Chave chave)
     {
         // Inserção da chave
         strcpy(dic[(ini + j) % M].chave, chave);
+        memoria++; // Incrementa a variável de memória
         return true;
     }
 
@@ -126,6 +130,7 @@ bool insereDocumento(IndiceInvertido dic, Chave chave, NomeDocumento doc)
     // Insere o documento e incrementa o n
     strcpy(dic[pos].documentos[dic[pos].n], doc);
     dic[pos].n++;
+    memoria++; //Incrementa a variável de memória 
     return true;
 }
 
@@ -298,6 +303,11 @@ void selecionaNaoVazio(NomeDocumento *origem, NomeDocumento *destino, int *qtd)
     // Retorna a quantidade de documentos válidos por referência
     *qtd = pos;
 }
+
 void imprimeColisoes(){
     printf("Quantidade de colisões: %d\n", colisoes);
+}
+
+void imprimeMemoria(){
+    printf("Memória gastas: %d unidades de memória\n", memoria);
 }
