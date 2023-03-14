@@ -43,4 +43,6 @@ void imprime(IndiceInvertido);
 
 void sort(NomeDocumento*, int);
 
+void imprimeColisoes();
+
 #endif // !HASH_ABERTO

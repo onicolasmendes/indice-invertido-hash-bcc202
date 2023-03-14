@@ -71,5 +71,6 @@ int main()
     clock_t end = clock();
     tempo_gasto += (double) (end - begin) / CLOCKS_PER_SEC;
     //printf("Tempo gasto %f s\n", tempo_gasto);
+    //imprimeColisoes();
     return 0;
 }

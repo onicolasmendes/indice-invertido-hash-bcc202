@@ -3,6 +3,10 @@
 #include <string.h>
 #include <stdio.h>
 
+
+//Colisoes
+int colisoes = 0;
+
 // Inicialização do indice invertido - Copia vazio para todas posições
 void inicia(IndiceInvertido dic)
 {
@@ -292,4 +296,7 @@ void selecionaNaoVazio(NomeDocumento *origem, NomeDocumento *destino, int *qtd)
     }
     // Retorna a quantidade de documentos válidos por referência
     *qtd = pos;
+}
+void imprimeColisoes(){
+    printf("Quantidade de colisões: %d\n", colisoes);
 }
