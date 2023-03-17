@@ -302,6 +302,8 @@ void imprimeColisoes(int colisoes)
 
 void imprimeMemoria()
 {
-    int memoria = M * sizeof(Item); // Tamanho do vetor IndiceInvertido alocado estaticamente
-    printf("Memória gasta: %d bytes\n", memoria);
+    /*Tamanho do vetor indiceInvertido,char nomeDocumento,tamanho do vetor da string,vetor NomeDocumento de resultados e documentos não vazios e o vetor
+    de chaves*/
+    int memoria = ((M * sizeof(Item)) + (D * sizeof(char)) + (MAX_STR * sizeof(char)) + (ND * sizeof(NomeDocumento)) + (ND * sizeof(NomeDocumento)) + (M * sizeof(Chave)));
+    printf("Memoria gasta: %d bytes\n", memoria);
 }
